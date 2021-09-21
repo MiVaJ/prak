@@ -114,6 +114,7 @@ namespace prak
         //событие нажатя кнопки
         public void bt_click(object sender, EventArgs eventArgs)
         {
+            dataGridView1.Rows.Clear();
             string s = tb1.Text;
             try
             {
@@ -124,7 +125,7 @@ namespace prak
                 {
                     
                     string[] strN = str.Split(';');
-                    if (s.CompareTo(strN[1]) == 0 || s.CompareTo(strN[0]) == 0)//сравниваем код или наименование с введенным значением 
+                    if (s.CompareTo(strN[1]) == 0 || s.CompareTo(strN[0]) == 0)
                     {
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[0].Height = 26;
@@ -140,7 +141,7 @@ namespace prak
                         break;
                     }
                 }
-                streamReader.Close();
+                streamReader.Close();    
             }
             catch (Exception e)
             {
