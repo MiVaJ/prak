@@ -30,12 +30,13 @@ namespace prak
             tabControl = new TabControl();
             tabControl.Dock = DockStyle.Fill;
             CreateTablePrep();//создание таблицы Препараты
-            CreateTableZak();
-            CreateTableSel();
+            CreateTableZak();//создание таблицы Закупки
+            CreateTableSel();//создание таблицы с купленными препаратами
             this.Controls.Add(tabControl);
             tabControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_F2);
 
         }
+        //создание главного меню
         private void CreateMainMenu()
         {
             mainMenu1 = new MainMenu();
@@ -47,12 +48,13 @@ namespace prak
 
             this.Menu = mainMenu1;
         }
+        //создание таблицы с препаратами
         private void CreateTablePrep()
         {
             dataGridView1 = new DataGridView();
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.Dock = DockStyle.Fill;//заполнению на всю страницу
+            dataGridView1.ReadOnly = true;//только чтение
+            dataGridView1.RowHeadersVisible = false;//убираем пустую колонку
             //создаем колонки
             var dataGridViewColumn1 = new DataGridViewColumn();
             dataGridViewColumn1.HeaderText = "Код препарата";
@@ -138,18 +140,19 @@ namespace prak
                 MessageBox.Show(e.Message);
             }
 
-            //добавляем страницу TabControl
+            //добавляем страницу в TabControl
             tabPage1 = new TabPage("Препараты");
             tabPage1.Controls.Add(dataGridView1);
             tabControl.TabPages.Add(tabPage1);
         }
+        //создание таблицы Закупки
         private void CreateTableZak()
         {
             dataGridView2 = new DataGridView();
-            dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.ReadOnly = true;
-            dataGridView2.RowHeadersVisible = false;
-
+            dataGridView2.Dock = DockStyle.Fill;//заполнение страницы
+            dataGridView2.ReadOnly = true;//только чтение
+            dataGridView2.RowHeadersVisible = false;//убираем пустую колонку
+            //создаем колонки
             var dataGridViewColumn1 = new DataGridViewColumn();
             dataGridViewColumn1.HeaderText = "Код договора";
             dataGridViewColumn1.Name = "codeD";
@@ -216,7 +219,7 @@ namespace prak
             {
                 MessageBox.Show(e.Message);
             }
-
+            //добавляем страницу в tabControl
             tabPage2 = new TabPage("Закупка");
             tabPage2.Controls.Add(dataGridView2);
             tabControl.TabPages.Add(tabPage2);
@@ -255,14 +258,14 @@ namespace prak
             dataGridViewColumn4.CellTemplate = new DataGridViewTextBoxCell();
             dataGridViewColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView3.Columns.Add(dataGridViewColumn4);
-            
+            //заполняем таблицу
             try
             {
                 StreamReader streamReader = new StreamReader("..\\..\\files\\receipt.txt", Encoding.UTF8);
                 string str;
                 int row = 0, i0 = 0;
                 int rows = System.IO.File.ReadAllLines("..\\..\\files\\receipt.txt").Length;
-                recList = new List<string>[rows];
+                recList = new List<string>[rows];//создаем списки препаратов для каждого чека
                 while ((str = streamReader.ReadLine()) != null)
                 {
                     dataGridView3.Rows.Add();
@@ -271,7 +274,7 @@ namespace prak
                     dataGridView3.Rows[row].Cells["dateOfSale"].Value = strN[1];
                     dataGridView3.Rows[row].Cells["time"].Value = strN[2];
                     dataGridView3.Rows[row].Cells["sum"].Value = strN[3];
-                    recList[i0] = new List<string>();
+                    recList[i0] = new List<string>();//создаем список препаратова для одного чека
                     for (int i = 4; i < strN.Length; i++) 
                     {
                         recList[i0].Add(strN[i]);
@@ -285,7 +288,7 @@ namespace prak
             {
                 MessageBox.Show(e.Message);
             }
-
+            //создаем страницу в TabControl
             tabPage3 = new TabPage("Продажи");
             tabPage3.Controls.Add(dataGridView3);
             tabControl.TabPages.Add(tabPage3);
@@ -300,11 +303,13 @@ namespace prak
                 f2.Show();
             }
         } 
+        //запрос: Поиск по дате
         private void ZakPoDate(object sender, EventArgs e)
         {
             Form3 f3 = new Form3();
             f3.Show();
         }
+        //запрос: поиск по наименованию или коду
         private void Poisk(object sender, EventArgs e)
         {
             Form4 f4 = new Form4();
