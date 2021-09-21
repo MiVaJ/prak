@@ -26,7 +26,7 @@ namespace prak
 
             this.Width = 1000;
             this.Height = 110;
-            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//фиксируем размер окна
             this.MaximizeBox = false;
             this.Text = "Писк препарата по коду или названию";
 
@@ -40,17 +40,16 @@ namespace prak
             bt1.Text = "Поиск";
             bt1.Width = 151;
             bt1.Height = 23;
+            bt1.Click += new EventHandler(bt_click);//событие нажатия кнопки
             this.Controls.Add(bt1);
-
-            bt1.Click += new EventHandler(bt_click);
-
+            
             dataGridView1 = new DataGridView();
             dataGridView1.Location = new Point(170, 10);
             dataGridView1.Width = 800;
             dataGridView1.Height = 52;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;//только чтение
+            dataGridView1.RowHeadersVisible = false;//убираем пустую колонку
+            dataGridView1.AllowUserToAddRows = false;//запрещаем добавлять данные
             //создаем колонки
             var dataGridViewColumn1 = new DataGridViewColumn();
             dataGridViewColumn1.HeaderText = "Код препарата";
@@ -112,6 +111,7 @@ namespace prak
             this.Controls.Add(dataGridView1);
 
         }
+        //событие нажатя кнопки
         public void bt_click(object sender, EventArgs eventArgs)
         {
             string s = tb1.Text;
@@ -122,10 +122,12 @@ namespace prak
                 int row = 0;
                 while ((str = streamReader.ReadLine()) != null)
                 {
-                    dataGridView1.Rows.Add();
+                    
                     string[] strN = str.Split(';');
-                    if (s.CompareTo(strN[1]) == 0 || s.CompareTo(strN[0]) == 0)
+                    if (s.CompareTo(strN[1]) == 0 || s.CompareTo(strN[0]) == 0)//сравниваем код или наименование с введенным значением 
                     {
+                        dataGridView1.Rows.Add();
+                        dataGridView1.Rows[0].Height = 26;
                         dataGridView1.Rows[row].Cells["code"].Value = strN[0];
                         dataGridView1.Rows[row].Cells["name"].Value = strN[1];
                         dataGridView1.Rows[row].Cells["quantity"].Value = strN[2];
@@ -139,8 +141,6 @@ namespace prak
                     }
                 }
                 streamReader.Close();
-                dataGridView1.Rows[0].Height = 26;
-                dataGridView1.Rows.Remove(dataGridView1.Rows[1]);
             }
             catch (Exception e)
             {
