@@ -26,10 +26,10 @@ namespace prak
             this.Width = 750;
             this.Text = "Таблицы";
 
-            CreateMainMenu();
+            CreateMainMenu();//создание главного меню
             tabControl = new TabControl();
             tabControl.Dock = DockStyle.Fill;
-            CreateTablePrep();
+            CreateTablePrep();//создание таблицы Препараты
             CreateTableZak();
             CreateTableSel();
             this.Controls.Add(tabControl);
