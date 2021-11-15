@@ -115,7 +115,6 @@ namespace prak
             //заполнение таблицы
             try
             {
-                //StreamReader streamReader = new StreamReader(@"C:\Users\shage\Desktop\c#\prak\files\data.txt", Encoding.UTF8);
                 StreamReader streamReader = new StreamReader("..\\..\\files\\data.txt", Encoding.UTF8);
                 string str;
                 int row = 0;
