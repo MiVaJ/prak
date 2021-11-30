@@ -33,7 +33,7 @@ namespace prak
             dataGridViewColumn2.HeaderText = "Количество";
             dataGridViewColumn2.Name = "quant";
             dataGridViewColumn2.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn2);
 
             bool pr = true;

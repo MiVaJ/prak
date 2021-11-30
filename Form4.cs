@@ -14,7 +14,6 @@ namespace prak
     public partial class Form4 : Form
     {
         TextBox tb1;
-        ComboBox cb1;
         Button bt1;
 
         DataGridView dataGridView1;
@@ -28,7 +27,7 @@ namespace prak
             this.Height = 110;
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;//фиксируем размер окна
             this.MaximizeBox = false;
-            this.Text = "Писк препарата по коду или названию";
+            this.Text = "Поиск препарата по коду или названию";
 
             tb1 = new TextBox();
             tb1.Location = new Point(10, 10);
@@ -118,7 +117,7 @@ namespace prak
             string s = tb1.Text;
             try
             {
-                StreamReader streamReader = new StreamReader(@"C:\Users\shage\Desktop\c#\prak\files\data.txt", Encoding.UTF8);
+                StreamReader streamReader = new StreamReader("..\\..\\files\\data.txt", Encoding.UTF8);
                 string str;
                 int row = 0;
                 while ((str = streamReader.ReadLine()) != null)

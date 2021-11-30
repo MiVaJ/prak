@@ -13,8 +13,8 @@ namespace prak
 {
     public partial class Form1 : Form
     {
-        MainMenu mainMenu1;
-        MenuItem menuItem1;
+        MainMenu mainMenu1, mainMenu2;
+        MenuItem menuItem1, menuItem2;
         TabControl tabControl;
         TabPage tabPage1, tabPage2, tabPage3;
         DataGridView dataGridView1, dataGridView2, dataGridView3;
@@ -40,11 +40,16 @@ namespace prak
         private void CreateMainMenu()
         {
             mainMenu1 = new MainMenu();
+            mainMenu2 = new MainMenu();
 
             menuItem1 = new MenuItem("Запросы");
             menuItem1.MenuItems.Add("Закупки по датам", new EventHandler(ZakPoDate));
             menuItem1.MenuItems.Add("Поиск препарата по коду или названию", new EventHandler(Poisk));
+            menuItem1.MenuItems.Add("График продаж в месяц", new EventHandler(GraphProd));
+            menuItem2 = new MenuItem("Нажмите F2 в таблице \"Продажи\" для подробной информации");
+            menuItem2.Enabled = false;
             mainMenu1.MenuItems.Add(menuItem1);
+            mainMenu1.MenuItems.Add(menuItem2);
 
             this.Menu = mainMenu1;
         }
@@ -57,10 +62,10 @@ namespace prak
             dataGridView1.RowHeadersVisible = false;//убираем пустую колонку
             //создаем колонки
             var dataGridViewColumn1 = new DataGridViewColumn();
-            dataGridViewColumn1.HeaderText = "Код препарата";
+            dataGridViewColumn1.HeaderText = "Код препарата ";
             dataGridViewColumn1.Name = "code";
             dataGridViewColumn1.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn1);
 
             var dataGridViewColumn2 = new DataGridViewColumn();
@@ -74,7 +79,7 @@ namespace prak
             dataGridViewColumn3.HeaderText = "Остаток";
             dataGridViewColumn3.Name = "quantity";
             dataGridViewColumn3.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn3);
 
             var dataGridViewColumn4 = new DataGridViewColumn();
@@ -88,14 +93,14 @@ namespace prak
             dataGridViewColumn5.HeaderText = "Код группы";
             dataGridViewColumn5.Name = "codeGr";
             dataGridViewColumn5.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn5.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn5.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn5);
 
             var dataGridViewColumn6 = new DataGridViewColumn();
             dataGridViewColumn6.HeaderText = "Стоимость";
             dataGridViewColumn6.Name = "price";
             dataGridViewColumn6.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn6);
 
             var dataGridViewColumn7 = new DataGridViewColumn();
@@ -109,7 +114,7 @@ namespace prak
             dataGridViewColumn8.HeaderText = "Продано";
             dataGridViewColumn8.Name = "sellQ";
             dataGridViewColumn8.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn8.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn8.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView1.Columns.Add(dataGridViewColumn8);
 
             //заполнение таблицы
@@ -156,14 +161,14 @@ namespace prak
             dataGridViewColumn1.HeaderText = "Код договора";
             dataGridViewColumn1.Name = "codeD";
             dataGridViewColumn1.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView2.Columns.Add(dataGridViewColumn1);
 
             var dataGridViewColumn2 = new DataGridViewColumn();
             dataGridViewColumn2.HeaderText = "Дата поставки";
             dataGridViewColumn2.Name = "date";
             dataGridViewColumn2.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView2.Columns.Add(dataGridViewColumn2);
 
             var dataGridViewColumn3 = new DataGridViewColumn();
@@ -177,7 +182,7 @@ namespace prak
             dataGridViewColumn4.HeaderText = "Телефон";
             dataGridViewColumn4.Name = "phone";
             dataGridViewColumn4.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
             dataGridView2.Columns.Add(dataGridViewColumn4);
 
             var dataGridViewColumn5 = new DataGridViewColumn();
@@ -191,7 +196,7 @@ namespace prak
             dataGridViewColumn6.HeaderText = "Количество";
             dataGridViewColumn6.Name = "quant";
             dataGridViewColumn6.CellTemplate = new DataGridViewTextBoxCell();
-            dataGridViewColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView2.Columns.Add(dataGridViewColumn6);
 
             //заполнение таблицы
@@ -308,11 +313,17 @@ namespace prak
             Form3 f3 = new Form3();
             f3.Show();
         }
-        //запрос: поиск по наименованию или коду
+        //запрос: Поиск по наименованию или коду
         private void Poisk(object sender, EventArgs e)
         {
             Form4 f4 = new Form4();
             f4.Show();
+        }
+        //запрос: График продаж
+        private void GraphProd(object sender, EventArgs e)
+        {
+            Form5 f5 = new Form5();
+            f5.Show();
         }
     }
 }
