@@ -124,7 +124,8 @@ namespace prak
                 {
                     
                     string[] strN = str.Split(';');
-                    if (s.CompareTo(strN[1]) == 0 || s.CompareTo(strN[0]) == 0)
+                    int index = strN[1].IndexOf(s,StringComparison.CurrentCultureIgnoreCase);
+                    if (index != -1 || s.CompareTo(strN[0]) == 0)
                     {
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[0].Height = 26;
